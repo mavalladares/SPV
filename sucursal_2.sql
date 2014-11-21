@@ -64,8 +64,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
 -- Volcado de datos para la tabla `groups`
 --
 
-INSERT INTO `groups` (`id`, `name`, `description`) VALUES
-(1, 'admin', 'administradores');
 
 -- --------------------------------------------------------
 
@@ -127,6 +125,14 @@ CREATE TABLE IF NOT EXISTS `sucursal` (
 --
 -- Volcado de datos para la tabla `sucursal`
 --
+INSERT INTO `groups` (`id`, `name`, `description`) VALUES
+(1, 'admin', 'administradores');
+
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', NULL, NULL, NULL, NULL, 1268889823, 1415831307, 1, 'Usuario', 'Administrador', 'Halcon 1', '000'),
+(15, '127.0.0.1', 'alejandro maldonado', '$2y$08$eomrWWssGciW77r7QNeoT.3pmAwJFUHgjf9E2wkTVuTpjLvMNjzmW', NULL, 'usuario@usuario.com', NULL, NULL, NULL, NULL, 1410126812, 1415831801, 1, 'Alejandro', 'Maldonado', NULL, '00');
+INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
+(2, 1, 1);
 
 INSERT INTO `sucursal` (`id`, `nombre`, `direccion`, `descripcion`) VALUES
 (1, 'Halcon 1', 'Conocida S/N', 'Sucursal Halcon1'),
@@ -163,10 +169,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', NULL, NULL, NULL, NULL, 1268889823, 1415831307, 1, 'Usuario', 'Administrador', 'Halcon 1', '000'),
-(15, '127.0.0.1', 'alejandro maldonado', '$2y$08$eomrWWssGciW77r7QNeoT.3pmAwJFUHgjf9E2wkTVuTpjLvMNjzmW', NULL, 'usuario@usuario.com', NULL, NULL, NULL, NULL, 1410126812, 1415831801, 1, 'Alejandro', 'Maldonado', NULL, '00');
-
 -- --------------------------------------------------------
 
 --
@@ -187,8 +189,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 -- Volcado de datos para la tabla `users_groups`
 --
 
-INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-(2, 1, 1);
+
 
 -- --------------------------------------------------------
 

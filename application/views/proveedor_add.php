@@ -26,10 +26,20 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
 
                                     <div class="clearfix"></div>
                                     <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="descripcion">Descripcion<span class="required">*</span></label>
+                                    <label class="col-sm-2 control-label" for="telefono">Telefono<span class="required">*</span></label>
                                     <div class="col-sm-10">  
-                                    <input required class ="form-control" id="descripcion" type="text" name="descripcion" value="<?php echo set_value('descripcion'); ?>"  />
-                                    <?php echo form_error('descripcion','<div>','</div>'); ?>
+                                    <input required class ="form-control" id="telefono" type="text" name="telefono" value="<?php echo set_value('telefono'); ?>"  />
+                                    <?php echo form_error('telefono','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+                                    
+
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="correo">Correo<span class="required">*</span></label>
+                                    <div class="col-sm-10">  
+                                    <input required class ="form-control" id="correo" type="email" name="correo" value="<?php echo set_value('correo'); ?>"  />
+                                    <?php echo form_error('correo','<div>','</div>'); ?>
                                     </div>
                                     </div>
                                     

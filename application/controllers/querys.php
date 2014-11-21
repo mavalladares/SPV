@@ -19,20 +19,7 @@ class Querys extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('ion_auth');
     } 
-     function checkLogin(){
-        if (!$this->ion_auth->logged_in())
-        {
-            //redirect them to the login page
-            redirect('auth/login', 'refresh');
-        }
-        elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
-        {
-            //redirect them to the home page because they must be an administrator to view this
-            return show_error('You must be an administrator to view this page.');
-        }
-    }
     function index(){
-                $this->checkLogin();
                 $this->load->database();
                 $table = $this->db->list_tables();
                 $data['table'] = $table[$this->input->post('table')];

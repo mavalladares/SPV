@@ -1,6 +1,6 @@
 <?php
 
-class Sucursal extends CI_Controller {
+class Empleado extends CI_Controller {
     
     function __construct() {
         parent::__construct();
@@ -31,8 +31,8 @@ class Sucursal extends CI_Controller {
         $this->load->library('pagination');
         
         //paging
-        $config['base_url'] = base_url().'index.php/sucursal/manage/';
-        $config['total_rows'] = $this->codegen_model->count('sucursal');
+        $config['base_url'] = base_url().'index.php/empleado/manage/';
+        $config['total_rows'] = $this->codegen_model->count('empleado');
         $config['per_page'] = 10;
         $this->pagination->initialize($config); 	
         // make sure to put the primarykey first when selecting , 
@@ -45,10 +45,10 @@ class Sucursal extends CI_Controller {
         }
         $limit = ' LIMIT '.$var.','.$config['per_page'];
 
-        $consulta= 'SELECT  id,nombre,direccion,descripcion FROM sucursal '.$limit;
+        $consulta= 'SELECT  id,nombre,direccion,numero FROM empleado '.$limit;
         $this->data['results'] = $this->codegen_model->query($consulta);
-	    $this->load->view('sucursal_list', $this->data); 
-        //$this->template->load('content', 'sucursal_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+	    $this->load->view('empleado_list', $this->data); 
+        //$this->template->load('content', 'empleado_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
     }
 	
     function add(){
@@ -56,7 +56,7 @@ class Sucursal extends CI_Controller {
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
 		
-        if ($this->form_validation->run('sucursal') == false)
+        if ($this->form_validation->run('empleado') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
 
@@ -65,17 +65,17 @@ class Sucursal extends CI_Controller {
             $data = array(
                     'nombre' => set_value('nombre'),
 					'direccion' => set_value('direccion'),
-					'descripcion' => set_value('descripcion')
+					'numero' => set_value('numero')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
                 if ($value === "") $data[$i] = null;
             }
-			if ($this->codegen_model->add('sucursal',$data) == TRUE)
+			if ($this->codegen_model->add('empleado',$data) == TRUE)
 			{
 				//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
 				// or redirect
-				redirect(base_url().'index.php/sucursal/manage/');
+				redirect(base_url().'index.php/empleado/manage/');
 			}
 			else
 			{
@@ -83,8 +83,8 @@ class Sucursal extends CI_Controller {
 
 			}
 		}		   
-		$this->load->view('sucursal_add', $this->data);   
-        //$this->template->load('content', 'sucursal_add', $this->data);
+		$this->load->view('empleado_add', $this->data);   
+        //$this->template->load('content', 'empleado_add', $this->data);
     }	
     
     function edit(){  
@@ -92,7 +92,7 @@ class Sucursal extends CI_Controller {
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
 		
-        if ($this->form_validation->run('sucursal') == false)
+        if ($this->form_validation->run('empleado') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
 
@@ -101,15 +101,15 @@ class Sucursal extends CI_Controller {
             $data = array(
                     'nombre' => $this->input->post('nombre'),
 					'direccion' => $this->input->post('direccion'),
-					'descripcion' => $this->input->post('descripcion')
+					'numero' => $this->input->post('numero')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
                 if ($value === "") $data[$i] = null;
             }
-			if ($this->codegen_model->edit('sucursal',$data,'id',$this->input->post('id')) == TRUE)
+			if ($this->codegen_model->edit('empleado',$data,'id',$this->input->post('id')) == TRUE)
 			{
-				redirect(base_url().'index.php/sucursal/manage/');
+				redirect(base_url().'index.php/empleado/manage/');
 			}
 			else
 			{
@@ -118,19 +118,19 @@ class Sucursal extends CI_Controller {
 			}
 		}
 
-		$this->data['result'] = $this->codegen_model->get('sucursal','id,nombre,direccion,descripcion','id = '.$this->uri->segment(3),NULL,NULL,true);
+		$this->data['result'] = $this->codegen_model->get('empleado','id,nombre,direccion,numero','id = '.$this->uri->segment(3),NULL,NULL,true);
 		
-		$this->load->view('sucursal_edit', $this->data);		
-        //$this->template->load('content', 'sucursal_edit', $this->data);
+		$this->load->view('empleado_edit', $this->data);		
+        //$this->template->load('content', 'empleado_edit', $this->data);
     }
 	
     function delete(){
     		$this->checkLogin();
             $ID =  $this->uri->segment(3);
-            $this->codegen_model->delete('sucursal','id',$ID);             
-            redirect(base_url().'index.php/sucursal/manage/');
+            $this->codegen_model->delete('empleado','id',$ID);             
+            redirect(base_url().'index.php/empleado/manage/');
     }
 }
 
-/* End of file sucursal.php */
-/* Location: ./system/application/controllers/sucursal.php */
+/* End of file empleado.php */
+/* Location: ./system/application/controllers/empleado.php */

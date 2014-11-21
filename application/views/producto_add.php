@@ -52,20 +52,24 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     <?php echo form_error('descripcion','<div>','</div>'); ?>
                                     </div>
                                     </div>
-                                    <input required class ="form-control" id="existencia" type="hidden" name="existencia" value="0"  />
+                                    
+
                                     <div class="clearfix"></div>
-                                    <?php
-                                    $table='sucursal';
-                                    $key='id';
-                                    $value='nombre';
-                                    $list = null;
-                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
-                                        $list[$row[$key]]=$row[$value];
-                                    }
-                                    $enum = $list;
-                                    if(!empty($enum)){
+                                    <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="existencia">Existencia<span class="required">*</span></label>
+                                    <div class="col-sm-10">  
+                                    <input required class ="form-control" id="existencia" type="number" name="existencia" value="<?php echo set_value('existencia'); ?>"  />
+                                    <?php echo form_error('existencia','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+                                    
+
+                                    <div class="clearfix"></div>
+                                    <?
+                                    $table='sucursal'; 
+                                    if(!empty($sucursal_id)){
                                     $class="";
-                                    $input = form_dropdown('sucursal_id', array("" => "")+$enum,"default",'class="form-control" required'); 
+                                    $input = form_dropdown('sucursal_id', array("" => "")+$sucursal_id,"default",'class="form-control" required'); 
                                     }else{
                                     $class = "has-error";
                                     $input = form_dropdown("error", array("0"=>"La tabla ".$table." debe tener almenos un registro"),"default", 'disabled="disabled" class="form-control"');
@@ -82,6 +86,32 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     </div><!-- /input-group -->
                                     
                                     <?php echo form_error('sucursal_id','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+                                    
+
+                                    <div class="clearfix"></div>
+                                    <?
+                                    $table='proveedor'; 
+                                    if(!empty($proveedor_id)){
+                                    $class="";
+                                    $input = form_dropdown('proveedor_id', array("" => "")+$proveedor_id,"default",'class="form-control" required'); 
+                                    }else{
+                                    $class = "has-error";
+                                    $input = form_dropdown("error", array("0"=>"La tabla ".$table." debe tener almenos un registro"),"default", 'disabled="disabled" class="form-control"');
+                                    }
+                                    ?>
+                                    <div class="form-group <?=$class?>">
+                                    <label class="col-sm-2 control-label" for="proveedor_id">Proveedor<span class="required">*</span></label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group">
+                                      <?=$input;?>
+                                      <span class="input-group-btn">
+                                        <a class="btn btn-primary" href="<?=base_url().$table?>/add" target="_blank"  ><span class="glyphicon glyphicon-plus"></span></a>
+                                      </span>
+                                    </div><!-- /input-group -->
+                                    
+                                    <?php echo form_error('proveedor_id','<div>','</div>'); ?>
                                     </div>
                                     </div>
                                     

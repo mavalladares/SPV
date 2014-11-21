@@ -35,6 +35,27 @@ echo form_open(current_url()); ?>
                                     </div>
 
                                     
+
+                                    <div class="clearfix"></div>
+                                    <?php
+                                    $table='pedido';                                                    
+                                    $input = form_dropdown('pedido_id', $pedido_id,$result->pedido_id,'class="form-control" required'); ?>
+                                    <?php echo form_error('pedido_id','<div>','</div>'); ?>
+                                    <div class="form-group ">
+                                    <label class="col-sm-2 control-label" for="pedido_id">Pedido<span class="required">*</span></label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group">
+                                      <?=$input;?>
+                                      <span class="input-group-btn">
+                                        <a class="btn btn-primary" href="<?=base_url().$table?>/add" target="_blank"  ><span class="glyphicon glyphicon-plus"></span></a>
+                                      </span>
+                                    </div><!-- /input-group -->
+                                    
+                                    <?php echo form_error('pedido_id','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+
+                                    
 <p class="pull-right">
         <input class="btn btn-primary" type="submit" value="Guardar">
 </p>

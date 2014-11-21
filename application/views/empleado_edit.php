@@ -27,10 +27,10 @@ echo form_open(current_url()); ?>
 
                                     <div class="clearfix"></div>
                                     <div class="form-group">
-                                    <label class="col-sm-2 control-label"  for="descripcion">Descripcion<span class="required">*</span></label>
+                                    <label class="col-sm-2 control-label"  for="numero">Numero<span class="required">*</span></label>
                                     <div class="col-sm-10">                                
-                                    <input required class ="form-control" id="descripcion" type="text" name="descripcion" value="<?php echo $result->descripcion ?>"  />
-                                    <?php echo form_error('descripcion','<div>','</div>'); ?>
+                                    <input required class ="form-control" id="numero" type="text" name="numero" value="<?php echo $result->numero ?>"  />
+                                    <?php echo form_error('numero','<div>','</div>'); ?>
                                     </div>
                                     </div>
                                     

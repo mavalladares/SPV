@@ -1,6 +1,6 @@
 <?php
 
-class Sucursal extends CI_Controller {
+class Camioneta extends CI_Controller {
     
     function __construct() {
         parent::__construct();
@@ -31,8 +31,8 @@ class Sucursal extends CI_Controller {
         $this->load->library('pagination');
         
         //paging
-        $config['base_url'] = base_url().'index.php/sucursal/manage/';
-        $config['total_rows'] = $this->codegen_model->count('sucursal');
+        $config['base_url'] = base_url().'index.php/camioneta/manage/';
+        $config['total_rows'] = $this->codegen_model->count('camioneta');
         $config['per_page'] = 10;
         $this->pagination->initialize($config); 	
         // make sure to put the primarykey first when selecting , 
@@ -45,37 +45,45 @@ class Sucursal extends CI_Controller {
         }
         $limit = ' LIMIT '.$var.','.$config['per_page'];
 
-        $consulta= 'SELECT  id,nombre,direccion,descripcion FROM sucursal '.$limit;
+        $consulta= 'SELECT  id,placas,modelo,ruta_id FROM camioneta '.$limit;
         $this->data['results'] = $this->codegen_model->query($consulta);
-	    $this->load->view('sucursal_list', $this->data); 
-        //$this->template->load('content', 'sucursal_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+	    $this->load->view('camioneta_list', $this->data); 
+        //$this->template->load('content', 'camioneta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
     }
 	
     function add(){
     	$this->checkLogin();        
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
-        if ($this->form_validation->run('sucursal') == false)
+		 
+                                    $table='ruta';
+                                    $key='id';
+                                    $value='direccion';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['ruta_id'] = $list;
+        if ($this->form_validation->run('camioneta') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
 
         } else
         {                            
             $data = array(
-                    'nombre' => set_value('nombre'),
-					'direccion' => set_value('direccion'),
-					'descripcion' => set_value('descripcion')
+                    'placas' => set_value('placas'),
+					'modelo' => set_value('modelo'),
+					'ruta_id' => set_value('ruta_id')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
                 if ($value === "") $data[$i] = null;
             }
-			if ($this->codegen_model->add('sucursal',$data) == TRUE)
+			if ($this->codegen_model->add('camioneta',$data) == TRUE)
 			{
 				//$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';
 				// or redirect
-				redirect(base_url().'index.php/sucursal/manage/');
+				redirect(base_url().'index.php/camioneta/manage/');
 			}
 			else
 			{
@@ -83,33 +91,41 @@ class Sucursal extends CI_Controller {
 
 			}
 		}		   
-		$this->load->view('sucursal_add', $this->data);   
-        //$this->template->load('content', 'sucursal_add', $this->data);
+		$this->load->view('camioneta_add', $this->data);   
+        //$this->template->load('content', 'camioneta_add', $this->data);
     }	
     
     function edit(){  
     	$this->checkLogin();      
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
-        if ($this->form_validation->run('sucursal') == false)
+		 
+                                    $table='ruta';
+                                    $key='id';
+                                    $value='direccion';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['ruta_id'] = $list;
+        if ($this->form_validation->run('camioneta') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
 
         } else
         {                            
             $data = array(
-                    'nombre' => $this->input->post('nombre'),
-					'direccion' => $this->input->post('direccion'),
-					'descripcion' => $this->input->post('descripcion')
+                    'placas' => $this->input->post('placas'),
+					'modelo' => $this->input->post('modelo'),
+					'ruta_id' => $this->input->post('ruta_id')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
                 if ($value === "") $data[$i] = null;
             }
-			if ($this->codegen_model->edit('sucursal',$data,'id',$this->input->post('id')) == TRUE)
+			if ($this->codegen_model->edit('camioneta',$data,'id',$this->input->post('id')) == TRUE)
 			{
-				redirect(base_url().'index.php/sucursal/manage/');
+				redirect(base_url().'index.php/camioneta/manage/');
 			}
 			else
 			{
@@ -118,19 +134,19 @@ class Sucursal extends CI_Controller {
 			}
 		}
 
-		$this->data['result'] = $this->codegen_model->get('sucursal','id,nombre,direccion,descripcion','id = '.$this->uri->segment(3),NULL,NULL,true);
+		$this->data['result'] = $this->codegen_model->get('camioneta','id,placas,modelo,ruta_id','id = '.$this->uri->segment(3),NULL,NULL,true);
 		
-		$this->load->view('sucursal_edit', $this->data);		
-        //$this->template->load('content', 'sucursal_edit', $this->data);
+		$this->load->view('camioneta_edit', $this->data);		
+        //$this->template->load('content', 'camioneta_edit', $this->data);
     }
 	
     function delete(){
     		$this->checkLogin();
             $ID =  $this->uri->segment(3);
-            $this->codegen_model->delete('sucursal','id',$ID);             
-            redirect(base_url().'index.php/sucursal/manage/');
+            $this->codegen_model->delete('camioneta','id',$ID);             
+            redirect(base_url().'index.php/camioneta/manage/');
     }
 }
 
-/* End of file sucursal.php */
-/* Location: ./system/application/controllers/sucursal.php */
+/* End of file camioneta.php */
+/* Location: ./system/application/controllers/camioneta.php */

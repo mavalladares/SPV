@@ -7,11 +7,11 @@ echo form_open(current_url()); ?>
 
                                     <div class="clearfix"></div>
                                     <?php
-                                    $table='users';                                                    
-                                    $input = form_dropdown('users_id', $users_id,$result->users_id,'class="form-control" required'); ?>
-                                    <?php echo form_error('users_id','<div>','</div>'); ?>
+                                    $table='venta';                                                    
+                                    $input = form_dropdown('venta_id', $venta_id,$result->venta_id,'class="form-control" required'); ?>
+                                    <?php echo form_error('venta_id','<div>','</div>'); ?>
                                     <div class="form-group ">
-                                    <label class="col-sm-2 control-label" for="users_id">Useruario<span class="required">*</span></label>
+                                    <label class="col-sm-2 control-label" for="venta_id">Venta<span class="required">*</span></label>
                                     <div class="col-sm-10">
                                       <div class="input-group">
                                       <?=$input;?>
@@ -20,7 +20,7 @@ echo form_open(current_url()); ?>
                                       </span>
                                     </div><!-- /input-group -->
                                     
-                                    <?php echo form_error('users_id','<div>','</div>'); ?>
+                                    <?php echo form_error('venta_id','<div>','</div>'); ?>
                                     </div>
                                     </div>
 
@@ -45,18 +45,6 @@ echo form_open(current_url()); ?>
                                     </div>
                                     </div>
 
-                                    
-
-                                    <div class="clearfix"></div>
-                                    <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="ventacol">Tipo<span class="required">*</span></label>
-                                    <div class="col-sm-10">
-                                    <?php
-                                    $enum = array('venta'=>'venta','pedido'=>'pedido',);                                                                    
-                                    echo form_dropdown('ventacol', $enum,$result->ventacol,'class="form-control" required'); ?>
-                                    <?php echo form_error('ventacol','<div>','</div>'); ?>
-                                    </div>
-                                    </div>
                                     
 <p class="pull-right">
         <input class="btn btn-primary" type="submit" value="Guardar">

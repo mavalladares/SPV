@@ -7,21 +7,21 @@ echo form_open(current_url()); ?>
 
                                     <div class="clearfix"></div>
                                     <div class="form-group">
-                                    <label class="col-sm-2 control-label"  for="cantidad">Cantidad<span class="required">*</span></label>
+                                    <label class="col-sm-2 control-label"  for="pago">Pago<span class="required">*</span></label>
                                     <div class="col-sm-10">                                
-                                    <input required class ="form-control" id="cantidad" type="number" name="cantidad" value="<?php echo $result->cantidad ?>"  />
-                                    <?php echo form_error('cantidad','<div>','</div>'); ?>
+                                    <input required class ="form-control" id="pago" type="number" name="pago" value="<?php echo $result->pago ?>"  />
+                                    <?php echo form_error('pago','<div>','</div>'); ?>
                                     </div>
                                     </div>
                                     
 
                                     <div class="clearfix"></div>
                                     <?php
-                                    $table='producto';                                                    
-                                    $input = form_dropdown('producto_id', $producto_id,$result->producto_id,'class="form-control" required'); ?>
-                                    <?php echo form_error('producto_id','<div>','</div>'); ?>
+                                    $table='venta_credito';                                                    
+                                    $input = form_dropdown('venta_credito_id', $venta_credito_id,$result->venta_credito_id,'class="form-control" required'); ?>
+                                    <?php echo form_error('venta_credito_id','<div>','</div>'); ?>
                                     <div class="form-group ">
-                                    <label class="col-sm-2 control-label" for="producto_id">Producto<span class="required">*</span></label>
+                                    <label class="col-sm-2 control-label" for="venta_credito_id">Folio venta a credito<span class="required">*</span></label>
                                     <div class="col-sm-10">
                                       <div class="input-group">
                                       <?=$input;?>
@@ -30,7 +30,7 @@ echo form_open(current_url()); ?>
                                       </span>
                                     </div><!-- /input-group -->
                                     
-                                    <?php echo form_error('producto_id','<div>','</div>'); ?>
+                                    <?php echo form_error('venta_credito_id','<div>','</div>'); ?>
                                     </div>
                                     </div>
 

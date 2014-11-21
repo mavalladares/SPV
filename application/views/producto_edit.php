@@ -53,21 +53,22 @@ echo form_open(current_url()); ?>
                                     <?php echo form_error('descripcion','<div>','</div>'); ?>
                                     </div>
                                     </div>
-                                     <input required class ="form-control" id="existencia" type="hidden" name="existencia" value="0"  />
+                                    
 
-
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                    <label class="col-sm-2 control-label"  for="existencia">Existencia<span class="required">*</span></label>
+                                    <div class="col-sm-10">                                
+                                    <input required class ="form-control" id="existencia" type="number" name="existencia" value="<?php echo $result->existencia ?>"  />
+                                    <?php echo form_error('existencia','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+                                    
 
                                     <div class="clearfix"></div>
                                     <?php
-                                    $table='sucursal';
-                                    $key='id';
-                                    $value='nombre';
-                                    $list = array(""=>"");
-                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
-                                        $list[$row[$key]]=$row[$value];
-                                    }
-                                    $enum = $list;                                                               
-                                    $input = form_dropdown('sucursal_id', $enum,$result->sucursal_id,'class="form-control" required'); ?>
+                                    $table='sucursal';                                                    
+                                    $input = form_dropdown('sucursal_id', $sucursal_id,$result->sucursal_id,'class="form-control" required'); ?>
                                     <?php echo form_error('sucursal_id','<div>','</div>'); ?>
                                     <div class="form-group ">
                                     <label class="col-sm-2 control-label" for="sucursal_id">Sucursal<span class="required">*</span></label>
@@ -80,6 +81,27 @@ echo form_open(current_url()); ?>
                                     </div><!-- /input-group -->
                                     
                                     <?php echo form_error('sucursal_id','<div>','</div>'); ?>
+                                    </div>
+                                    </div>
+
+                                    
+
+                                    <div class="clearfix"></div>
+                                    <?php
+                                    $table='proveedor';                                                    
+                                    $input = form_dropdown('proveedor_id', $proveedor_id,$result->proveedor_id,'class="form-control" required'); ?>
+                                    <?php echo form_error('proveedor_id','<div>','</div>'); ?>
+                                    <div class="form-group ">
+                                    <label class="col-sm-2 control-label" for="proveedor_id">Proveedor<span class="required">*</span></label>
+                                    <div class="col-sm-10">
+                                      <div class="input-group">
+                                      <?=$input;?>
+                                      <span class="input-group-btn">
+                                        <a class="btn btn-primary" href="<?=base_url().$table?>/add" target="_blank"  ><span class="glyphicon glyphicon-plus"></span></a>
+                                      </span>
+                                    </div><!-- /input-group -->
+                                    
+                                    <?php echo form_error('proveedor_id','<div>','</div>'); ?>
                                     </div>
                                     </div>
 

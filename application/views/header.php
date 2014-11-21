@@ -138,7 +138,7 @@
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
+                <ul class="nav navbar-nav side-nav" style="overflow-y: scroll; height:600px;">
                     <?if ($this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
                       {
                     ?>
@@ -179,8 +179,41 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw  fa-truck"></i> Compras <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw  fa-thumb-tack"></i> Rutas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
+                            <li>
+                              <a href="<?=base_url()?>ruta/add">Agregar</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>ruta">Ver Rutas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw  fa-truck"></i> Camionetas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo5" class="collapse">
+                            <li>
+                              <a href="<?=base_url()?>camioneta/add">Agregar</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>camioneta">Ver camionetas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw  fa-user"></i> Empleado <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo6" class="collapse">
+                            <li>
+                              <a href="<?=base_url()?>empleado/add">Agregar</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>empleado">Ver empleados</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw  fa-truck"></i> Compras <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo7" class="collapse">
                             <li>
                               <a href="<?=base_url()?>compra/add">Agregar</a>
                             </li>
@@ -192,21 +225,110 @@
                             </li>
                         </ul>
                     </li>
-                    <?}else{?>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw fa-money"></i> Ventas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo5" class="collapse">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo24"><i class="fa fa-fw fa-users"></i> Clientes <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo24" class="collapse">
+                            <li>
+                              <a href="<?=base_url()?>cliente/manage">Ver clientes</a>
+                            </li>
                              <li>
-                              <a href="<?=base_url()?>venta/add">Hacer una venta</a>
+                              <a href="<?=base_url()?>cliente/add">Dar de alta</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo25"><i class="fa fa-fw fa-money"></i> Ventas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo25" class="collapse">
+                             <li>
+                              <a href="<?=base_url()?>venta/add">Hacer una venta o pedido</a>
                             </li>
                             <li>
                               <a href="<?=base_url()?>venta">Ver ventas</a>
                             </li>
                             <li>
+                              <a href="<?=base_url()?>venta/pedidos">Ver pedidos</a>
+                            </li>
+                            <li>
                               <a href="<?=base_url()?>venta/sum_today">Totales ventas de hoy</a>
                             </li>
                             <li>
+                              <a href="<?=base_url()?>venta/sum_todayP">Totales pedidos de hoy</a>
+                            </li>
+                            <li>
                               <a href="<?=base_url()?>venta/today">Ver ventas de hoy</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/todayP">Ver pedidos de hoy</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo30"><i class="fa fa-fw fa-map-marker"></i> Creditos <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo30" class="collapse">
+
+                            <li>
+                              <a href="<?=base_url()?>venta_credito">Ver ventas a credito</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>cpx/add">Hacer pago de credito</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>cpx">Ver pagos de creditos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?}else{?>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo24"><i class="fa fa-fw fa-users"></i> Clientes <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo24" class="collapse">
+                            <li>
+                              <a href="<?=base_url()?>cliente/manage">Ver clientes</a>
+                            </li>
+                             <li>
+                              <a href="<?=base_url()?>cliente/add">Dar de alta</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo25"><i class="fa fa-fw fa-money"></i> Ventas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo25" class="collapse">
+                             <li>
+                              <a href="<?=base_url()?>venta/add">Hacer una venta o pedido</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta">Ver ventas</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/pedidos">Ver pedidos</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/sum_today">Totales ventas de hoy</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/sum_todayP">Totales pedidos de hoy</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/today">Ver ventas de hoy</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>venta/todayP">Ver pedidos de hoy</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo30"><i class="fa fa-fw fa-map-marker"></i> Creditos <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo30" class="collapse">
+
+                            <li>
+                              <a href="<?=base_url()?>venta_credito">Ver ventas a credito</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>cpx/add">Hacer pago de credito</a>
+                            </li>
+                            <li>
+                              <a href="<?=base_url()?>cpx">Ver pagos de creditos</a>
                             </li>
                         </ul>
                     </li>

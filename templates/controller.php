@@ -33,23 +33,29 @@ class {controller_name} extends CI_Controller {
         //paging
         $config['base_url'] = base_url().'index.php/{controller_name_l}/manage/';
         $config['total_rows'] = $this->codegen_model->count('{table}');
-        $config['per_page'] = 3;	
+        $config['per_page'] = 10;
         $this->pagination->initialize($config); 	
         // make sure to put the primarykey first when selecting , 
 		//eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
 		// Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
-		$this->data['results'] = $this->codegen_model->get('{table}','{fields_list}','',$config['per_page'],$this->uri->segment(3));
-       
-	   $this->load->view('{view}_list', $this->data); 
-       //$this->template->load('content', '{view}_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
-		
+		if($this->uri->segment(3)==""){
+            $var=0;
+        }else{
+            $var = $this->uri->segment(3);
+        }
+        $limit = ' LIMIT '.$var.','.$config['per_page'];
+
+        $consulta= 'SELECT  {fields_list} FROM {table} '.$limit;
+        $this->data['results'] = $this->codegen_model->query($consulta);
+	    $this->load->view('{view}_list', $this->data); 
+        //$this->template->load('content', '{view}_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
     }
 	
     function add(){
     	$this->checkLogin();        
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
+		{pre}
         if ($this->form_validation->run('{validation_name}') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
@@ -83,7 +89,7 @@ class {controller_name} extends CI_Controller {
     	$this->checkLogin();      
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
+		{pre}
         if ($this->form_validation->run('{validation_name}') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);

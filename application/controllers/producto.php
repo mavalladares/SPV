@@ -15,6 +15,11 @@ class Producto extends CI_Controller {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
+        elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+        {
+            //redirect them to the home page because they must be an administrator to view this
+            return show_error('You must be an administrator to view this page.');
+        }
     }
 	function index(){
 		$this->manage();
@@ -48,37 +53,12 @@ class Producto extends CI_Controller {
        //$this->template->load('content', 'producto_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
         
     }
-	function manage(){
-		$this->checkLogin();
-        $this->load->library('table');
-        $this->load->library('pagination');
-        
-        //paging
-        $config['base_url'] = base_url().'index.php/producto/manage/';
-        $config['total_rows'] = $this->codegen_model->count('producto');
-        $config['per_page'] = 30;	
-        $this->pagination->initialize($config); 	
-        if($this->uri->segment(3)==""){
-            $var=0;
-        }else{
-            $var = $this->uri->segment(3);
-        }
-        // make sure to put the primarykey first when selecting , 
-		//eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
-		// Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
-		//$this->data['results'] = $this->codegen_model->get('producto','id,nombre,precio_pza_provedor,precio_pza_venta,marca,descripcion,sucursal_id','',$config['per_page'],$this->uri->segment(3));
-       $r1 = $this->codegen_model->query('SELECT producto.id, producto.nombre as Producto, producto.precio_pza_provedor as Precio_provedor, producto.precio_pza_venta as Precio_venta, producto.marca, producto.descripcion FROM producto order by producto.nombre asc LIMIT '.$var.','.$config['per_page'],'','');
-        $this->data['results'] = json_decode(json_encode($r1),true);
-	   $this->load->view('producto_list', $this->data); 
-       //$this->template->load('content', 'producto_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
-		
-    }
     function find(){
         $ID =  $this->uri->segment(3);
 
         $r1 = $this->codegen_model->query('SELECT producto.id as id,count(venta_productos.id) as Total_de_ventas, sum(venta_productos.cantidad) as Cantidades_vendidas, producto.nombre as Producto_vendido FROM venta_productos  join producto on venta_productos.producto_id=producto.id where producto.id='.$ID.' group by venta_productos.producto_id','','');
         $results2= json_decode(json_encode($r1),true);
-
+        
         $r1 = $this->codegen_model->query('SELECT producto.id as id ,producto.nombre,producto.precio_pza_venta as precio, sum(compra.cantidad) as Comprados,producto.descripcion FROM producto left join compra on producto.id=compra.producto_id  where producto.id='.$ID.'  group by producto.id','','');
         $results = json_decode(json_encode($r1),true);
 
@@ -177,12 +157,54 @@ class Producto extends CI_Controller {
        //$this->template->load('content', 'producto_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
         
     }
+
+	function manage(){
+		$this->checkLogin();
+        $this->load->library('table');
+        $this->load->library('pagination');
+        
+        //paging
+        $config['base_url'] = base_url().'index.php/producto/manage/';
+        $config['total_rows'] = $this->codegen_model->count('producto');
+        $config['per_page'] = 10;
+        $this->pagination->initialize($config); 	
+        // make sure to put the primarykey first when selecting , 
+		//eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
+		// Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
+		if($this->uri->segment(3)==""){
+            $var=0;
+        }else{
+            $var = $this->uri->segment(3);
+        }
+        $limit = ' LIMIT '.$var.','.$config['per_page'];
+
+        $consulta= 'SELECT  id,nombre,precio_pza_provedor,precio_pza_venta,marca,descripcion,existencia,sucursal_id,proveedor_id FROM producto '.$limit;
+        $this->data['results'] = $this->codegen_model->query($consulta);
+	    $this->load->view('producto_list', $this->data); 
+        //$this->template->load('content', 'producto_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+    }
 	
     function add(){
     	$this->checkLogin();        
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
+		 
+                                    $table='sucursal';
+                                    $key='id';
+                                    $value='nombre';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['sucursal_id'] = $list; 
+                                    $table='proveedor';
+                                    $key='id';
+                                    $value='nombre';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['proveedor_id'] = $list;
         if ($this->form_validation->run('producto') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
@@ -195,8 +217,9 @@ class Producto extends CI_Controller {
 					'precio_pza_venta' => set_value('precio_pza_venta'),
 					'marca' => set_value('marca'),
 					'descripcion' => set_value('descripcion'),
+					'existencia' => set_value('existencia'),
 					'sucursal_id' => set_value('sucursal_id'),
-                    'existencia' => set_value('existencia')
+					'proveedor_id' => set_value('proveedor_id')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
@@ -222,7 +245,23 @@ class Producto extends CI_Controller {
     	$this->checkLogin();      
         $this->load->library('form_validation');    
 		$this->data['custom_error'] = '';
-		
+		 
+                                    $table='sucursal';
+                                    $key='id';
+                                    $value='nombre';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['sucursal_id'] = $list; 
+                                    $table='proveedor';
+                                    $key='id';
+                                    $value='nombre';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['proveedor_id'] = $list;
         if ($this->form_validation->run('producto') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
@@ -235,8 +274,9 @@ class Producto extends CI_Controller {
 					'precio_pza_venta' => $this->input->post('precio_pza_venta'),
 					'marca' => $this->input->post('marca'),
 					'descripcion' => $this->input->post('descripcion'),
+					'existencia' => $this->input->post('existencia'),
 					'sucursal_id' => $this->input->post('sucursal_id'),
-                    'existencia' => $this->input->post('existencia')
+					'proveedor_id' => $this->input->post('proveedor_id')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
@@ -253,7 +293,7 @@ class Producto extends CI_Controller {
 			}
 		}
 
-		$this->data['result'] = $this->codegen_model->get('producto','id,nombre,precio_pza_provedor,precio_pza_venta,existencia,marca,descripcion,sucursal_id','id = '.$this->uri->segment(3),NULL,NULL,true);
+		$this->data['result'] = $this->codegen_model->get('producto','id,nombre,precio_pza_provedor,precio_pza_venta,marca,descripcion,existencia,sucursal_id,proveedor_id','id = '.$this->uri->segment(3),NULL,NULL,true);
 		
 		$this->load->view('producto_edit', $this->data);		
         //$this->template->load('content', 'producto_edit', $this->data);

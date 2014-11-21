@@ -1,7 +1,7 @@
 <?$this->load->view('header')?>
 <?php
-echo anchor(base_url().'index.php/sucursal/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
-echo '<h1> sucursal</h1>';
+echo anchor(base_url().'index.php/detalles_pedido/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
+echo '<h1> detalles_pedido</h1>';
 if(!$results){
 	echo '<h3>No hay datos :C</h3>';
 	exit;
@@ -10,7 +10,7 @@ if(!$results){
 
 for($i=0;$i<count($results);$i++){
             $id = array_values($results[$i]);
-            $results[$i]['Edit']     = '<div class="btn-group">'.anchor(base_url().'index.php/sucursal/edit/'.$id[0],'<span class="glyphicon glyphicon-pencil"></span>',
+            $results[$i]['Edit']     = '<div class="btn-group">'.anchor(base_url().'index.php/detalles_pedido/edit/'.$id[0],'<span class="glyphicon glyphicon-pencil"></span>',
               array('class'=>'btn btn-warning')).anchor('#','<span class="glyphicon glyphicon-trash"></span>',array("id"=>$id[0],"class"=>"btn btn-danger toDelete","data-toggle"=>"modal","data-target"=>"#myModal")).'</div>';
             //$results[$i]['Delete']   =                                           
 
@@ -30,7 +30,7 @@ echo $this->table->generate($results);
 <script type="text/javascript">
 $(document).ready(function(){
     $('.toDelete').click(function(){
-        $('a.borrar').attr('href',"<?=base_url()?>index.php/sucursal/delete/"+$(this).attr('id'));
+        $('a.borrar').attr('href',"<?=base_url()?>index.php/detalles_pedido/delete/"+$(this).attr('id'));
     });
 });
 </script>

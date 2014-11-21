@@ -40,7 +40,33 @@ class Venta extends CI_Controller {
         //eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
         // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
         //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
-        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
+        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where venta.ventacol = "venta" GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
+        $this->data['results'] = json_decode(json_encode($r1),true);
+       $this->load->view('venta_list', $this->data); 
+       //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+        
+    }
+    function pedidos(){
+        $this->checkLogin();
+        $this->load->library('table');
+        $this->load->library('pagination');
+        
+        //paging
+        //SELECT venta.id, venta.fecha, users.first_name FROM venta join users on venta.users_id=users.id
+        $config['base_url'] = base_url().'index.php/venta/manage/';
+        $config['total_rows'] = $this->codegen_model->count('venta');
+        $config['per_page'] = 60;    
+        $this->pagination->initialize($config);     
+        if($this->uri->segment(3)==""){
+            $var=0;
+        }else{
+            $var=$this->uri->segment(3);
+        }
+        // make sure to put the primarykey first when selecting , 
+        //eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
+        // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
+        //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
+        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where venta.ventacol = "pedido" GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
         $this->data['results'] = json_decode(json_encode($r1),true);
        $this->load->view('venta_list', $this->data); 
        //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
@@ -51,7 +77,24 @@ class Venta extends CI_Controller {
         $this->load->library('table');
         $this->load->library('pagination');
         
-        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id GROUP BY venta.id order by venta.id desc ','','');
+        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id  where venta.ventacol = "venta" GROUP BY venta.id order by venta.id desc ','','');
+        $this->data['results'] = json_decode(json_encode($r1),true);
+      
+       $this->load->helper(array(
+            'dompdf',
+            'file'
+        ));
+        $html = $this->load->view('venta_list_imprimir', $this->data,true); 
+        pdf_create($html,'Reporte-Ventas');
+       //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+        
+    }
+    function imprimirP(){
+        $this->checkLogin();
+        $this->load->library('table');
+        $this->load->library('pagination');
+        
+        $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where venta.ventacol = "pedido" GROUP BY venta.id order by venta.id desc ','','');
         $this->data['results'] = json_decode(json_encode($r1),true);
       
        $this->load->helper(array(
@@ -84,9 +127,36 @@ class Venta extends CI_Controller {
         // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
         //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
 
-       $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE() GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
+       $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE()  and venta.ventacol = "venta"  GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
        $this->data['results'] = json_decode(json_encode($r1),true);
        $this->load->view('venta_list', $this->data); 
+       //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+        
+    }
+    function todayP(){
+        $this->checkLogin();
+        $this->load->library('table');
+        $this->load->library('pagination');
+        if($this->uri->segment(3)==""){
+            $var=0;
+        }else{
+            $var=$this->uri->segment(3);
+        }
+        //paging
+        //SELECT venta.id, venta.fecha, users.first_name FROM venta join users on venta.users_id=users.id
+        $config['base_url'] = base_url().'index.php/venta/manage/';
+        $config['total_rows'] = $this->codegen_model->count('venta');
+        $config['per_page'] = 6000;    
+        $this->pagination->initialize($config);     
+        
+        // make sure to put the primarykey first when selecting , 
+        //eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
+        // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
+        //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
+
+       $r1 = $this->codegen_model->query('SELECT venta.id,venta.id+100 as folio, sum(venta_productos.cantidad) as Productos_Vendidos,venta.fecha, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total, venta.fecha FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE() and venta.ventacol = "pedido" GROUP BY venta.id order by venta.id desc LIMIT '.$var.','.$config['per_page'],'','');
+       $this->data['results'] = json_decode(json_encode($r1),true);
+       $this->load->view('venta_list_p', $this->data); 
        //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
         
     }
@@ -106,9 +176,31 @@ class Venta extends CI_Controller {
         //eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
         // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
         //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
-        $r1 = $this->codegen_model->query('SELECT venta.id,sum(venta_productos.cantidad) as Productos_vendidos, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE() ','','');
+        $r1 = $this->codegen_model->query('SELECT venta.id,sum(venta_productos.cantidad) as Productos_vendidos, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE() and venta.ventacol = "venta" ','','');
         $this->data['results'] = json_decode(json_encode($r1),true);
        $this->load->view('venta_list_sum_today', $this->data); 
+       //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
+        
+    }
+    function sum_todayP(){
+        $this->checkLogin();
+        $this->load->library('table');
+        $this->load->library('pagination');
+        
+        //paging
+        //SELECT venta.id, venta.fecha, users.first_name FROM venta join users on venta.users_id=users.id
+        $config['base_url'] = base_url().'index.php/venta/manage/';
+        $config['total_rows'] = $this->codegen_model->count('venta');
+        $config['per_page'] = 6000;    
+        $this->pagination->initialize($config);     
+        
+        // make sure to put the primarykey first when selecting , 
+        //eg. 'userID,name as Name , lastname as Last_Name' , Name and Last_Name will be use as table header.
+        // Last_Name will be converted into Last Name using humanize() function, under inflector helper of the CI core.
+        //$this->data['results'] = $this->codegen_model->get('venta','id,sucursal_id,users_id','',$config['per_page'],$this->uri->segment(3));
+        $r1 = $this->codegen_model->query('SELECT venta.id,sum(venta_productos.cantidad) as Productos_vendidos, SUM(producto.precio_pza_venta*venta_productos.cantidad) as $_Total FROM  venta join venta_productos on venta.id=venta_productos.venta_id join producto on venta_productos.producto_id=producto.id where DATE(venta.fecha) = CURDATE() and venta.ventacol = "venta" ','','');
+        $this->data['results'] = json_decode(json_encode($r1),true);
+       $this->load->view('venta_list_sum_today_p', $this->data); 
        //$this->template->load('content', 'venta_list', $this->data); // if have template library , http://maestric.com/doc/php/codeigniter_template
         
     }
@@ -116,7 +208,22 @@ class Venta extends CI_Controller {
         $this->checkLogin();        
         $this->load->library('form_validation');    
         $this->data['custom_error'] = '';
-        
+                                    $table='users';
+                                    $key='id';
+                                    $value='username';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['users_id'] = $list; 
+                                    $table='cliente';
+                                    $key='id';
+                                    $value='nombre';
+                                    $list = null;
+                                    foreach($this->codegen_model->get($table,$key.",".$value,"","","") as $row){
+                                        $list[$row[$key]]=$row[$value];
+                                    }
+                                    $this->data['cliente_id'] = $list;
         if ($this->form_validation->run('venta') == false)
         {
              $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">'.validation_errors().'</div>' : false);
@@ -124,7 +231,9 @@ class Venta extends CI_Controller {
         } else
         {                            
             $data = array(
-                    'users_id' => $this->ion_auth->user()->row()->id
+                    'users_id' => $this->ion_auth->user()->row()->id,
+                    'cliente_id' => $this->input->post('cliente_id'),
+                    'ventacol' => $this->input->post('ventacol')
             );
            //add cause sometimes, when pass empty string I get troubles in the insert 
             foreach ($data as $i => $value) {
@@ -141,6 +250,19 @@ class Venta extends CI_Controller {
                         'producto_id' => $productos[$i],
                         'cantidad'=> $cantidades[$i]
                         );
+                }
+                    if($this->input->post('credito')==2){
+                        $data2 = array(
+                        'venta_id' => $id_venta,
+                        'cliente_id' => $this->input->post('cliente_id')
+                        );
+                       //add cause sometimes, when pass empty string I get troubles in the insert 
+                        foreach ($data2 as $i => $value) {
+                            if ($value === "") $data2[$i] = null;
+                        }
+                        if ($this->codegen_model->add('venta_credito',$data2) == TRUE)
+                        {
+                        }
                 $this->codegen_model->add('venta_productos',$data);
                 }
                 //$this->data['custom_error'] = '<div class="form_ok"><p>Added</p></div>';

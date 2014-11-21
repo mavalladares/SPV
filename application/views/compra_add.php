@@ -112,7 +112,7 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     
 <div class="col-md-12 ">
 <div class="pull-right">
-	<input type="submit" class="btn btn-primary" value="Guardar">
+    <input type="submit" class="btn btn-primary" value="Guardar">
 </div>
 </div>
 <?php echo form_close(); ?>

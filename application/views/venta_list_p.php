@@ -1,25 +1,22 @@
 <?$this->load->view('header')?>
+<h1>Pedidos</h1>
+<a href="<?=base_url()?>/venta/imprimirP" class="btn btn-success">Imprimir</a>
 <?php
-echo anchor(base_url().'index.php/sucursal/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
-echo '<h1> sucursal</h1>';
 if(!$results){
-	echo '<h3>No hay datos :C</h3>';
+	echo '<h3>No hay datos </h3>';
 	exit;
 }
 	$header = array_keys($results[0]);
 
 for($i=0;$i<count($results);$i++){
             $id = array_values($results[$i]);
-            $results[$i]['Edit']     = '<div class="btn-group">'.anchor(base_url().'index.php/sucursal/edit/'.$id[0],'<span class="glyphicon glyphicon-pencil"></span>',
-              array('class'=>'btn btn-warning')).anchor('#','<span class="glyphicon glyphicon-trash"></span>',array("id"=>$id[0],"class"=>"btn btn-danger toDelete","data-toggle"=>"modal","data-target"=>"#myModal")).'</div>';
+            $results[$i]['Edit']     = '<a class="btn btn-primary" href="'.base_url().'venta_productos/manage/'.$id[0].'" >ver detalles</a>';
             //$results[$i]['Delete']   =                                           
-
-            array_shift($results[$i]);                        
+            
         }
 
-$clean_header = clean_header($header);
-array_shift($clean_header);
-$this->table->set_heading($clean_header); 
+
+$this->table->set_heading($header); 
 
 // view
 $tmpl = array ( 'table_open'  => '<table class="table">' );
@@ -30,7 +27,7 @@ echo $this->table->generate($results);
 <script type="text/javascript">
 $(document).ready(function(){
     $('.toDelete').click(function(){
-        $('a.borrar').attr('href',"<?=base_url()?>index.php/sucursal/delete/"+$(this).attr('id'));
+        $('a.borrar').attr('href',"<?=base_url()?>index.php/venta/delete/"+$(this).attr('id'));
     });
 });
 </script>
