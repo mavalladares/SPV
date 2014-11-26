@@ -16,7 +16,7 @@
         </div>
          <?php echo lang('login_subheading');?>
           <div id="infoMessage"><?php echo $message;?></div>
-          <?$class['class']='form col-md-12 center-block';?>
+          <?php $class['class']='form col-md-12 center-block';?>
           <?=form_open("auth/login",$class);?>
              <table>
         <tr>
