@@ -1,13 +1,22 @@
-
 <?$this->load->view('header')?>
-<a href="<?=base_url()?><?=$url?>" class="btn btn-success">Imprimir</a>
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Compras
+            <small>Lista de compras</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+         <a href="<?=base_url()?><?=$url?>" class="btn btn-success">Imprimir</a>
 <?php
-echo '<h1> compra</h1>';
+
 if(!$results){
-	echo '<h3>No hay datos</h3>';
-	exit;
+  echo '<h3>No hay datos</h3>';
+  exit;
 }
-	$header = array_keys($results[0]);
+  $header = array_keys($results[0]);
 
 for($i=0;$i<count($results);$i++){
             $id = array_values($results[$i]);
@@ -25,6 +34,11 @@ $this->table->set_template($tmpl);
 echo $this->table->generate($results); 
 ?>
 <?=$this->pagination->create_links();?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('.toDelete').click(function(){

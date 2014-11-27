@@ -1,10 +1,18 @@
 <? $this->load->view('header');?>
-  <div class="row clearfix">
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Usuarios 
+            <small>Crear usuarios</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+           <div class="row clearfix">
     <div class="col-md-12 column">
-      <?php echo form_open("auth/create_user");?>
+      <?php echo form_open("auth/create_user", array("class"=> 'form-horizontal'));?>
       <div class="col-md-12">
-      <h2 class="modal-title" id="myModalLabel"><?=lang('create_user_heading');?></h2>
-      <h5><?=lang('create_user_subheading');?></h5>
       <div id="infoMessage">
       <?if($message!=""):?>
       <div class="alert alert-warning alert-dismissable">
@@ -103,4 +111,7 @@
       <?=form_close();?>
     </div>
   </div>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+  
 <? $this->load->view('footer');?>

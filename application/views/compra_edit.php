@@ -1,7 +1,17 @@
 <?$this->load->view('header')?>
-
-<?php
-echo form_open(current_url()); ?>
+<?$this->load->view('header')?>
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Compras
+            <small>Editar compras</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+            <?php
+echo form_open(current_url(), array('class'=>'form-horizontal')); ?>
 <?php echo $custom_error; ?>
 <?php echo form_hidden('id',$result->id) ?>
 
@@ -18,7 +28,7 @@ echo form_open(current_url()); ?>
                                     <div class="clearfix"></div>
                                     <?php
                                     $table='producto';                                                    
-                                    $input = form_dropdown('producto_id', $producto_id,$result->producto_id,'class="form-control" required'); ?>
+                                    $input = form_dropdown('producto_id', $result->producto_id ,$result->producto_id,'class="form-control" required'); ?>
                                     <?php echo form_error('producto_id','<div>','</div>'); ?>
                                     <div class="form-group ">
                                     <label class="col-sm-2 control-label" for="producto_id">Producto<span class="required">*</span></label>
@@ -40,5 +50,10 @@ echo form_open(current_url()); ?>
 </p>
 
 <?php echo form_close(); ?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
+
 <?$this->load->view('footer')?>
 

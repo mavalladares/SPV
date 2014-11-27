@@ -45,6 +45,6 @@
                   </div>
             </div>
             <?php echo form_close(); ?>
-            </section><!-- /.content -->
-            </aside><!-- /.right-side -->
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
             <?$this->load->view('footer')?>

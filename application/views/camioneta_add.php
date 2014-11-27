@@ -1,6 +1,15 @@
 <?$this->load->view('header')?>
-
-<?php 
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Camioneta
+            <small>Agregar camionetas</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+           <?php 
 echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
 <?php echo $custom_error; ?>
 
@@ -51,8 +60,13 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     
 <div class="col-md-12 ">
 <div class="pull-right">
-	<input type="submit" class="btn btn-primary" value="Guardar">
+    <input type="submit" class="btn btn-primary" value="Guardar">
 </div>
 </div>
 <?php echo form_close(); ?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
+
 <?$this->load->view('footer')?>

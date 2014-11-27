@@ -44,7 +44,7 @@
 		</table>
 		
 		</section><!-- /.content -->
-		</aside><!-- /.right-side -->
+</aside><!-- /.right-side -->
 		
 		<!-- Button trigger modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

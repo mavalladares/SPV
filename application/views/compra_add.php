@@ -1,29 +1,15 @@
 <?$this->load->view('header')?>
-<script>
-$(document).ready(function(){
-    $('.productos').on('change',function(){
-        var id = $( ".productos option:selected" ).attr('value');
-        $.ajax({ 
-        type: 'GET', 
-        url: '<?=base_url()?>producto/find/'+id,  
-        dataType: 'json',
-        success: function(data) {
-            for (var i=0, len=data.length; i < len; i++) {
-              console.log(data[i].descripcion);
-              $('.descripcion').empty();
-              $('.existencia').text('0');
-              $('.descripcion').text(data[i].descripcion);
-              $('.existencia').text(data[i].Existencia);
-            }
-        }   
-        });
-    });
-    var d = new Date();
-    var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
-    $('.fecha').text(strDate);
-});
-</script>
-<?php 
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Compras
+            <small>Agregar compras</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+           <?php 
 echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
 <?php echo $custom_error; ?>
 
@@ -116,4 +102,32 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
 </div>
 </div>
 <?php echo form_close(); ?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+<script>
+$(document).ready(function(){
+    $('.productos').on('change',function(){
+        var id = $( ".productos option:selected" ).attr('value');
+        $.ajax({ 
+        type: 'GET', 
+        url: '<?=base_url()?>producto/find/'+id,  
+        dataType: 'json',
+        success: function(data) {
+            for (var i=0, len=data.length; i < len; i++) {
+              console.log(data[i].descripcion);
+              $('.descripcion').empty();
+              $('.existencia').text('0');
+              $('.descripcion').text(data[i].descripcion);
+              $('.existencia').text(data[i].Existencia);
+            }
+        }   
+        });
+    });
+    var d = new Date();
+    var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+    $('.fecha').text(strDate);
+});
+</script>
+
 <?$this->load->view('footer')?>

@@ -1,42 +1,49 @@
 <?$this->load->view('header')?>
-<?php
-echo anchor(base_url().'index.php/sucursal/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
-echo '<h1> sucursal</h1>';
-if(!$results){
-	echo '<h3>No hay datos :C</h3>';
-	exit;
-}
-	$header = array_keys($results[0]);
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 class="text-info">
+    Sucursal
+    <small>Lista de sucursales</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+      <?php
+      echo anchor(base_url().'index.php/sucursal/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));   
+      if(!$results){   
+      exit;
+      }
+      echo "<br/><br/>";
+      $header = array_keys($results[0]);
+      for($i=0;$i<count($results);$i++){
+      $id = array_values($results[$i]);
+      $results[$i]['Edit']     = '<div class="btn-group">'.anchor(base_url().'index.php/sucursal/edit/'.$id[0],'<span class="glyphicon glyphicon-pencil"></span>',
+      array('class'=>'btn btn-warning')).anchor('#','<span class="glyphicon glyphicon-trash"></span>',array("id"=>$id[0],"class"=>"btn btn-danger toDelete","data-toggle"=>"modal","data-target"=>"#myModal")).'</div>';
+      //$results[$i]['Delete']   =
+      array_shift($results[$i]);
+      }
+      $clean_header = clean_header($header);
+      array_shift($clean_header);
+      $this->table->set_heading($clean_header);
+      $tmpl = array ( 'table_open'  => '<table class="table">' );
+      $this->table->set_template($tmpl);
+      echo $this->table->generate($results);
+      ?>
+      <?=$this->pagination->create_links();?>
+      
+        </section><!-- /.content -->
+</aside>
 
-for($i=0;$i<count($results);$i++){
-            $id = array_values($results[$i]);
-            $results[$i]['Edit']     = '<div class="btn-group">'.anchor(base_url().'index.php/sucursal/edit/'.$id[0],'<span class="glyphicon glyphicon-pencil"></span>',
-              array('class'=>'btn btn-warning')).anchor('#','<span class="glyphicon glyphicon-trash"></span>',array("id"=>$id[0],"class"=>"btn btn-danger toDelete","data-toggle"=>"modal","data-target"=>"#myModal")).'</div>';
-            //$results[$i]['Delete']   =                                           
 
-            array_shift($results[$i]);                        
-        }
 
-$clean_header = clean_header($header);
-array_shift($clean_header);
-$this->table->set_heading($clean_header); 
-
-// view
-$tmpl = array ( 'table_open'  => '<table class="table">' );
-$this->table->set_template($tmpl);
-echo $this->table->generate($results); 
-?>
-<?=$this->pagination->create_links();?>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.toDelete').click(function(){
-        $('a.borrar').attr('href',"<?=base_url()?>index.php/sucursal/delete/"+$(this).attr('id'));
-    });
+$('.toDelete').click(function(){
+$('a.borrar').attr('href',"<?=base_url()?>index.php/sucursal/delete/"+$(this).attr('id'));
+});
 });
 </script>
-<?$this->load->view('footer')?>
-</body>
-</html>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -55,3 +62,4 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+<?$this->load->view('footer')?>

@@ -1,12 +1,21 @@
 <?$this->load->view('header')?>
-<?php
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Sucursal
+            <small>Lista de rutas</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+           <?php
 echo anchor(base_url().'index.php/ruta/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
-echo '<h1> ruta</h1>';
 if(!$results){
-	echo '<h3>No hay datos :C</h3>';
-	exit;
+  echo '<h3>No hay datos :C</h3>';
+  exit;
 }
-	$header = array_keys($results[0]);
+  $header = array_keys($results[0]);
 
 for($i=0;$i<count($results);$i++){
             $id = array_values($results[$i]);
@@ -27,6 +36,10 @@ $this->table->set_template($tmpl);
 echo $this->table->generate($results); 
 ?>
 <?=$this->pagination->create_links();?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('.toDelete').click(function(){
