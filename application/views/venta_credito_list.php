@@ -1,12 +1,22 @@
 <?$this->load->view('header')?>
-<?php
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Venta Crédito
+            <small>Lista de ventas a crédito</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+        <?php
 echo anchor(base_url().'index.php/venta_credito/add/','<span class="glyphicon glyphicon-plus"></span> Agregar',array('class'=>'btn btn-primary'));
 echo '<h1> Creditos </h1>';
 if(!$results){
-	echo '<h3>No hay datos :C</h3>';
-	exit;
+  echo '<h3>No hay datos :C</h3>';
+  exit;
 }
-	$header = array_keys($results[0]);
+  $header = array_keys($results[0]);
 
 for($i=0;$i<count($results);$i++){
             $id = array_values($results[$i]);
@@ -34,6 +44,10 @@ $(document).ready(function(){
     });
 });
 </script>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
 <?$this->load->view('footer')?>
 </body>
 </html>

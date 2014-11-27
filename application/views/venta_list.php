@@ -45,9 +45,6 @@ $(document).ready(function(){
     });
 });
 </script>
-<?$this->load->view('footer')?>
-</body>
-</html>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -66,3 +63,4 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+<?$this->load->view('footer')?>

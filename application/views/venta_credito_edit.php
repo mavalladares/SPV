@@ -1,6 +1,15 @@
 <?$this->load->view('header')?>
-
-<?php
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Venta Crédito
+            <small>Editar venta a crédito</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+           <?php
 echo form_open(current_url()); ?>
 <?php echo $custom_error; ?>
 <?php echo form_hidden('id',$result->id) ?>
@@ -51,5 +60,9 @@ echo form_open(current_url()); ?>
 </p>
 
 <?php echo form_close(); ?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
 <?$this->load->view('footer')?>
 
