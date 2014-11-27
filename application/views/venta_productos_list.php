@@ -1,5 +1,15 @@
 <?$this->load->view('header')?>
-<div class="row">
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Ventas productos
+            <small>Lista de venta de productos</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+            <div class="row">
 	<div class="col-md-4">
 		<div class="row">
 			<div class="col-md-6 ">Folio de compra:</div>
@@ -54,6 +64,10 @@ echo $this->table->generate($results);
 		<a class="btn btn-success" href="<?=base_url()?>venta_productos/imprimir/<?=$results2[0]["id"]?>">Imprimir ticket</a>
 	</div>
 </div>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+
 <?$this->load->view('footer')?>
 </body>
 </html>

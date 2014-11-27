@@ -1,64 +1,15 @@
 <?$this->load->view('header')?>
-<script>
-$(document).on('ready',function(){
-      $('#tipo').change(function() {
-        var tipo = $('#tipo option:selected').val();
-        if(tipo=="venta"){
-          $('.cliente').css("visibility","visible");
-          $('.credito').css("visibility","visible");
-        }else{
-          $('.cliente').css("visibility",'hidden');
-          $('.credito').css("visibility",'hidden');
-          }
-          console.log(tipo);
-    });
-var gal=0;
-$('#venta').on('show.bs.modal', function (e) {
-if(gal!=1){
-  $.ajax({
-   url:'<?=base_url()?>index.php/producto/lista',
-   type:'GET',
-   success: function(data){
-       $('.resultado').html(data);
-       console.log(gal)
-       gal =1;
-   }
-  });
-}
-});
-$('#venta').on('hidden.bs.modal', function (e) {
-guardar();
-});
-$('#guarda').on('click',function(){
-     guardar(); 
-});
-function guardar(){
-  var total=0;
-  var productos=0;
-   $('.res').empty();
-      $('.resultado').find('input[type=checkbox]:checked').each(function(){
-        var clon = $(this).closest('tr').clone();
-        //console.log(clon.html());
-        clon.appendTo('.res');
-        console.log(parseInt($(clon).find('input[type=number]').val()));
-        total +=parseInt($(this).closest('tr').find('.precio').text())*parseInt($(clon).find('input[type=number]').val());
-        productos +=parseInt($(clon).find('input[type=number]').val());
-      });
-      $('.totales').text(total);
-      $('.productos').text(productos);
-}
-    var d = new Date();
-    var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
-    $('.fecha').text(strDate);
-});
-function ver(){
-  console.log($('.res').html());
-}
-
-
-</script>
-
-<?php 
+<aside class="right-side">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+            <h1 class="text-info">
+            Ventas
+            <small>Agregar ventas</small>
+            </h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+            <?php 
 echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     <div class="clearfix"></div>
                                     <div class="form-group">
@@ -158,10 +109,73 @@ echo form_open(current_url(),array('class'=>'form-horizontal')); ?>
                                     
 <div class="col-md-12 ">
 <div class="pull-right">
-	<input type="submit" class="btn btn-primary" value="Guardar">
+  <input type="submit" class="btn btn-primary" value="Guardar">
 </div>
 </div>
 <?php echo form_close(); ?>
+      </section><!-- /.content -->
+</aside><!-- /.right-side -->
+
+<script>
+$(document).on('ready',function(){
+      $('#tipo').change(function() {
+        var tipo = $('#tipo option:selected').val();
+        if(tipo=="venta"){
+          $('.cliente').css("visibility","visible");
+          $('.credito').css("visibility","visible");
+        }else{
+          $('.cliente').css("visibility",'hidden');
+          $('.credito').css("visibility",'hidden');
+          }
+          console.log(tipo);
+    });
+var gal=0;
+$('#venta').on('show.bs.modal', function (e) {
+if(gal!=1){
+  $.ajax({
+   url:'<?=base_url()?>index.php/producto/lista',
+   type:'GET',
+   success: function(data){
+       $('.resultado').html(data);
+       console.log(gal)
+       gal =1;
+   }
+  });
+}
+});
+$('#venta').on('hidden.bs.modal', function (e) {
+guardar();
+});
+$('#guarda').on('click',function(){
+     guardar(); 
+});
+function guardar(){
+  var total=0;
+  var productos=0;
+   $('.res').empty();
+      $('.resultado').find('input[type=checkbox]:checked').each(function(){
+        var clon = $(this).closest('tr').clone();
+        //console.log(clon.html());
+        clon.appendTo('.res');
+        console.log(parseInt($(clon).find('input[type=number]').val()));
+        total +=parseInt($(this).closest('tr').find('.precio').text())*parseInt($(clon).find('input[type=number]').val());
+        productos +=parseInt($(clon).find('input[type=number]').val());
+      });
+      $('.totales').text(total);
+      $('.productos').text(productos);
+}
+    var d = new Date();
+    var strDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate();
+    $('.fecha').text(strDate);
+});
+function ver(){
+  console.log($('.res').html());
+}
+
+
+</script>
+
+
 <?$this->load->view('footer')?>
 
 <div class="modal fade" id="venta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
