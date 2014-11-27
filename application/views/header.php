@@ -1,344 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="UTF-8">
         <title><?=$this->config->item('title'); ?></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="<?=base_url();?>/assets/css/bootstrap.css" rel="stylesheet">
-        <link href="<?=base_url();?>/assets/css/sb-admin.css" rel="stylesheet">
-        <link href="<?=base_url();?>assets/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
-              <!-- jQuery Version 1.11.0 -->
-        <script src="<?=base_url();?>/assets/js/jquery-1.11.0.js"></script>
-        <script src="<?=base_url();?>/assets/js/bootstrap.js"></script>
-</head>
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- bootstrap 3.0.2 -->
+        <link href="<?=base_url();?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- font Awesome -->
+        <link href="<?=base_url();?>/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!-- Ionicons -->
+        <link href="<?=base_url();?>/assets/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="<?=base_url();?>/assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body class="skin-blue">
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            <a href="#" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                Halcón
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><?=$this->config->item('name');?></a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="label label-success">4</span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 4 messages</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?=base_url();?>/assets/img/avatar3.png" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?=base_url();?>/assets/img/avatar2.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    AdminLTE Design Team
+                                                    <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?=base_url();?>/assets/img/avatar.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Developers
+                                                    <small><i class="fa fa-clock-o"></i> Today</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?=base_url();?>/assets/img/avatar2.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Sales Department
+                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="<?=base_url();?>/assets/img/avatar.png" class="img-circle" alt="user image"/>
+                                                </div>
+                                                <h4>
+                                                    Reviewers
+                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
                         </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-warning"></i>
+                                <span class="label label-warning">10</span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-people info"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users warning"></i> 5 new members joined
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-cart success"></i> 25 sales made
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="ion ion-ios7-person danger"></i> You changed your username
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
                         </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span><?=$this->ion_auth->user()->row()->first_name?> <?=$this->ion_auth->user()->row()->last_name?> <i class="caret"></i></span>
                             </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    <img src="<?=base_url();?>/assets/img/avatar3.png" class="img-circle" alt="User Image" />
+                                    <p>
+                                        <?=$this->ion_auth->user()->row()->first_name?> <?=$this->ion_auth->user()->row()->last_name?>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="<?=base_url()?>auth" class="btn btn-default btn-flat"><i class="fa fa-fw fa-user"></i>Perfil</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="<?=base_url()?>auth/logout" class="btn btn-default btn-flat"><i class="fa fa-fw fa-power-off"></i>Salir</a>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                     <?
-                 $r1 = $this->codegen_model->query('SELECT producto.id as id,count(venta_productos.id) as Total_de_ventas, sum(venta_productos.cantidad) as Cantidades_vendidas, producto.nombre as Producto_vendido FROM venta_productos  join producto on venta_productos.producto_id=producto.id group by venta_productos.producto_id','','');
-                  $results2= json_decode(json_encode($r1),true);
-
-                  $r1 = $this->codegen_model->query('SELECT producto.id as id ,producto.nombre,producto.precio_pza_venta as precio, sum(compra.cantidad) as Comprados,producto.descripcion FROM producto left join compra on producto.id=compra.producto_id group by producto.id','','');
-                  $results = json_decode(json_encode($r1),true);
-
-                  $header = array_keys($results[0]);
-                  $header[]="Vendidos";
-                  $header[]="Existencia";
-                  for($i=0;$i<count($results);$i++){
-                              $id = array_values($results[$i]);
-                              $results[$i]["Vendido"] = 0;
-                              $results[$i]["Existencia"] = $id[2];
-                              for($j=0;$j<count($results2);$j++){
-                                    $id_2 = array_values($results2[$j]);
-                                    if($id[0]==$id_2[0]){
-                                          $results[$i]["Vendido"] = $id_2[2];
-                                          $results[$i]["Existencia"] = $id[3]-$id_2[2];
-                                    }
-                              }
-                              //$results[$i]['Delete']   =
-                          }
-                  foreach($results as $result):
-                    if($result["Existencia"]<10):
-                  ?>
-                        <li>
-                            <a href="#"><?=$result["nombre"]?><span class="label label-warning"><?=$result["Existencia"]?></span></a>
-                        </li>
-                  <?
-                    endif;
-                    endforeach;?>
-                       
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
                         
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?=$this->ion_auth->user()->row()->first_name?> <?=$this->ion_auth->user()->row()->last_name?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="<?=base_url()?>auth"><i class="fa fa-fw fa-user"></i> Mi perfil</a>
+                        <?if ($this->ion_auth->is_admin()) 
+                          {
+                        ?>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-map-marker"></i>
+                                <span>Sucursales</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>sucursal/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>sucursal"><i class="fa fa-angle-double-right"></i> Ver lista</a></li>
+                                
+                            </ul>
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="<?=base_url()?>auth/logout"><i class="fa fa-fw fa-power-off"></i>Salir</a>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-users"></i>
+                                <span>Usuarios</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>auth/create_user"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>auth"><i class="fa fa-angle-double-right"></i> Ver lista</a></li>
+                                
+                            </ul>
                         </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-book"></i>
+                                <span>Productos</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>producto/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>producto/inventario"><i class="fa fa-angle-double-right"></i> Inventario</a></li>
+                                <li><a href="<?=base_url()?>producto"><i class="fa fa-angle-double-right"></i> Ver lista</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw  fa-thumb-tack"></i>
+                                <span>Rutas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>ruta/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>ruta"><i class="fa fa-angle-double-right"></i> Ver Rutas</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw  fa-truck"></i> 
+                                <span>Camionetas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>camioneta/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>camioneta"><i class="fa fa-angle-double-right"></i> Ver camionetas</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw  fa-user"></i> 
+                                <span>Empleados</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>empleado/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>empleado"><i class="fa fa-angle-double-right"></i> Ver empleados</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw  fa-truck"></i>  
+                                <span>Compras</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>compra/add"><i class="fa fa-angle-double-right"></i> Agregar</a></li>
+                                <li><a href="<?=base_url()?>compra"><i class="fa fa-angle-double-right"></i> Ver Compras</a></li>
+                                <li><a href="<?=base_url()?>compra/today"><i class="fa fa-angle-double-right"></i> Compras de hoy</a></li>
+                                </ul>
+                            </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-users"></i>  
+                                <span>Clientes</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="<?=base_url()?>cliente/manage"><i class="fa fa-angle-double-right"></i> Ver clientes</a></li>
+                                <li><a href="<?=base_url()?>cliente/add"><i class="fa fa-angle-double-right"></i> Dar de alta</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-money"></i> 
+                                <span>Ventas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                            <li><a href="<?=base_url()?>venta/add"><i class="fa fa-angle-double-right"></i> Hacer una venta o pedido</a></li>
+                            <li><a href="<?=base_url()?>venta"><i class="fa fa-angle-double-right"></i> Ver ventas</a></li>
+                            <li><a href="<?=base_url()?>venta/pedidos"><i class="fa fa-angle-double-right"></i> Ver pedidos</a></li>
+                            <li><a href="<?=base_url()?>venta/sum_today"><i class="fa fa-angle-double-right"></i> Totales ventas de hoy</a></li>
+                            <li><a href="<?=base_url()?>venta/sum_todayP"><i class="fa fa-angle-double-right"></i> Totales pedidos de hoy</a></li>
+                            <li><a href="<?=base_url()?>venta/today"><i class="fa fa-angle-double-right"></i> Ver ventas de hoy</a></li>
+                            <li><a href="<?=base_url()?>venta/todayP"><i class="fa fa-angle-double-right"></i> Ver pedidos de hoy</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-fw fa-map-marker"></i> 
+                                <span>Créditos</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                            <ul class="treeview-menu">
+                            <li><a href="<?=base_url()?>venta_credito"><i class="fa fa-angle-double-right"></i> Ver ventas a credito</a></li>
+                            <li><a href="<?=base_url()?>cpx/add"><i class="fa fa-angle-double-right"></i> Hacer pago de credito</a></li>
+                            <li><a href="<?=base_url()?>cpx"><i class="fa fa-angle-double-right"></i> Ver pagos de creditos</a></li>
+                            </ul>
+                        </li>
+                        <?}?>
                     </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav" style="overflow-y: scroll; height:600px;">
-                    <?if ($this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
-                      {
-                    ?>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-map-marker"></i> Sucursales <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>sucursal/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>sucursal">Ver lista</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-users"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo2" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>auth/create_user">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>auth">Ver lista</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-book"></i> Productos <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo3" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>producto/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>producto/inventario">Inventario</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>producto">Ver lista</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw  fa-thumb-tack"></i> Rutas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo4" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>ruta/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>ruta">Ver Rutas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw  fa-truck"></i> Camionetas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo5" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>camioneta/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>camioneta">Ver camionetas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw  fa-user"></i> Empleado <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo6" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>empleado/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>empleado">Ver empleados</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw  fa-truck"></i> Compras <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo7" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>compra/add">Agregar</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>compra">Ver Compras</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>compra/today">Compras de hoy</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo24"><i class="fa fa-fw fa-users"></i> Clientes <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo24" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>cliente/manage">Ver clientes</a>
-                            </li>
-                             <li>
-                              <a href="<?=base_url()?>cliente/add">Dar de alta</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo25"><i class="fa fa-fw fa-money"></i> Ventas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo25" class="collapse">
-                             <li>
-                              <a href="<?=base_url()?>venta/add">Hacer una venta o pedido</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta">Ver ventas</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/pedidos">Ver pedidos</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/sum_today">Totales ventas de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/sum_todayP">Totales pedidos de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/today">Ver ventas de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/todayP">Ver pedidos de hoy</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo30"><i class="fa fa-fw fa-map-marker"></i> Creditos <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo30" class="collapse">
-
-                            <li>
-                              <a href="<?=base_url()?>venta_credito">Ver ventas a credito</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>cpx/add">Hacer pago de credito</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>cpx">Ver pagos de creditos</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <?}else{?>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo24"><i class="fa fa-fw fa-users"></i> Clientes <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo24" class="collapse">
-                            <li>
-                              <a href="<?=base_url()?>cliente/manage">Ver clientes</a>
-                            </li>
-                             <li>
-                              <a href="<?=base_url()?>cliente/add">Dar de alta</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo25"><i class="fa fa-fw fa-money"></i> Ventas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo25" class="collapse">
-                             <li>
-                              <a href="<?=base_url()?>venta/add">Hacer una venta o pedido</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta">Ver ventas</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/pedidos">Ver pedidos</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/sum_today">Totales ventas de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/sum_todayP">Totales pedidos de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/today">Ver ventas de hoy</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>venta/todayP">Ver pedidos de hoy</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo30"><i class="fa fa-fw fa-map-marker"></i> Creditos <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo30" class="collapse">
-
-                            <li>
-                              <a href="<?=base_url()?>venta_credito">Ver ventas a credito</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>cpx/add">Hacer pago de credito</a>
-                            </li>
-                            <li>
-                              <a href="<?=base_url()?>cpx">Ver pagos de creditos</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <?}?>
-                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid" style="min-height:600px;">
+                </section>
+                <!-- /.sidebar -->
+            </aside>
